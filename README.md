@@ -1,6 +1,7 @@
-# Winget Update Monitor 🚀
 
-A lightweight, silent, open-source tool that resides in the system tray to keep your Windows applications up to date.
+# WinGet Update Monitor 🚀
+
+A lightweight, open-source tool that lives quietly in your system tray to keep your Windows applications up to date.
 
 ![Platform](https://img.shields.io/badge/Platform-Windows%2010%2F11-blue)
 ![Built With](https://img.shields.io/badge/Built%20With-PowerShell-5391FE)
@@ -8,23 +9,49 @@ A lightweight, silent, open-source tool that resides in the system tray to keep 
 
 ## ✨ Features
 
-* **👻 Ghost Mode:** The icon remains completely hidden when there are no updates, keeping your system tray clean.
-* **🔔 Native Notifications:** Uses the native Windows 10/11 notification system (Toast).
-* **⚡ Quick Action:** Clicking the notification or icon opens the terminal prompt; with your confirmation, it silently installs all updates (`--silent`).
-* **🛡️ Lightweight:** Built on PowerShell, consuming minimal resources in the background.
+* **👻 Ghost Mode:** The icon remains completely hidden if no updates are found, keeping your system tray clean.
+* **🔔 Smart Notifications:** Alerts you only when updates are available. If the notification is ignored for 30 seconds, the app closes automatically to save resources.
+* **⚡ Quick Action:** Clicking the notification opens a terminal that allows you to install all updates silently (`--silent`) upon your confirmation.
+* **🛠️ Resource Efficient:** Instead of running constantly in the background, it is designed to be triggered by Task Scheduler every 4 hours, closing itself once the check is done.
 
-## 🚀 Installation & Usage
+## 🚀 Setup (Task Scheduler)
 
-1.  Download the `WingetMonitor.exe` file from the **[Releases Page](https://github.com/osmanonurkoc/WinGet_Monitor/releases/latest)**.
-2.  Run the application. (Note: It will not be visible initially if there are no pending updates; it runs in the background).
-3.  To start the application automatically on boot, place a shortcut of the `.exe` file into your `shell:startup` folder.
+Since this app is optimized to run and exit, it is recommended to add it to the **Windows Task Scheduler**. This ensures it checks for updates periodically without consuming RAM in between.
 
-## 🛠️ Build (For Developers)
+### Option 1: Automatic Setup via Terminal (Fastest)
+1. Place the `WinGetMonitor.exe` in a permanent folder (e.g., `C:\Program Files\WinGetMonitor\`).
+2. Open **PowerShell** or **CMD** as **Administrator**.
+3. Run the following command (replace the path with your actual file location):
 
-This project is compiled using **PowerShell Studio**. The source code (`.ps1`) is included in the repository. To use a custom icon, the script automatically extracts it from the executable or looks for an `app.ico` file in the same directory.
+```powershell
+schtasks /Create /TN "WinGetMonitorTask" /TR "'C:\Path\To\WinGetMonitor.exe'" /SC HOURLY /MO 4 /F
+```
+### Option 2: Manual Setup
+
+1.  Open **Task Scheduler**.
+    
+2.  Click **Create Basic Task**.
+    
+3.  Set the trigger to **When I log on**.
+    
+4.  Set the action to **Start a program** and select your `WinGetMonitor.exe`.
+    
+5.  Once created, open the task's **Properties**, go to the **Triggers** tab, and edit the trigger to include **Repeat task every: 4 hours**.
+    
+
+## 🛠️ For Developers
+
+This project is written in PowerShell and compiled using `ps2exe`.
+
+-   Source code is available in `.ps1` format.
+    
+-   The system tray icon is automatically extracted from the compiled EXE.
+    
 
 ## 📄 License
+
 This project is licensed under the [MIT License](LICENSE).
 
----
-*Created by [@osmanonurkoc](https://www.osmanonurkoc.com)*
+----------
+
+_Created by [@osmanonurkoc](https://github.com/osmanonurkoc)_
