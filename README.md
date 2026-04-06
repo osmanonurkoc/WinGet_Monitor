@@ -6,6 +6,8 @@ A lightweight, open-source tool that lives quietly in your system tray to keep y
 ![Platform](https://img.shields.io/badge/Platform-Windows%2010%2F11-blue)
 ![Built With](https://img.shields.io/badge/Built%20With-PowerShell-5391FE)
 ![License](https://img.shields.io/badge/License-MIT-green)
+![Downloads](https://img.shields.io/github/downloads/osmanonurkoc/WinGet_Monitor/total)
+![Release](https://img.shields.io/github/v/release/osmanonurkoc/WinGet_Monitor)
 
 ## ✨ Features
 
